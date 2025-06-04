@@ -11,12 +11,17 @@ import org.fossify.phone.databinding.ActivityExtensionSettingsBinding
 import org.fossify.phone.extensions.core.ExtensionManager
 import org.fossify.phone.extensions.core.PhoneExtension
 import org.fossify.phone.dialogs.ExtensionConfigDialog
-import org.fossify.commons.dialogs.ConfirmationAdvancedDialog
+import org.fossify.commons.dialogs.RadioGroupDialog
+import org.fossify.commons.models.RadioItem
 
 /**
  * Actividad para configurar las extensiones del sistema
  */
 class ExtensionSettingsActivity : BaseSimpleActivity() {
+    
+    override fun getAppIconIDs(): ArrayList<Int> = arrayListOf()
+    override fun getAppLauncherName(): String = getString(R.string.app_launcher_name)
+    override fun getRepositoryName(): String? = null
     
     private val binding by viewBinding(ActivityExtensionSettingsBinding::inflate)
     private val extensionManager = ExtensionManager.getInstance()
@@ -68,8 +73,8 @@ class ExtensionSettingsActivity : BaseSimpleActivity() {
         adapter = ExtensionSettingsAdapter(
             extensions = extensions.toMutableList(),
             onExtensionToggled = { extension, enabled ->
-                extension.setEnabled(enabled)
-                extensionManager.saveExtensionSettings()
+                extension.isEnabled = enabled
+                extensionManager.saveExtensionSettings(extension)
             },
             onExtensionConfigured = { extension ->
                 showExtensionConfigDialog(extension)
@@ -106,20 +111,18 @@ class ExtensionSettingsActivity : BaseSimpleActivity() {
             "USSD Interceptor" to "org.fossify.phone.extensions.ussd.USSDInterceptorExtension"
         )
         
-        val items = availableExtensions.map { it.first }.toTypedArray()
+        val radioItems = availableExtensions.mapIndexed { index, (name, _) ->
+            RadioItem(index, name)
+        }
         
-        ConfirmationAdvancedDialog(
+        RadioGroupDialog(
             activity = this,
-            message = "",
-            messageId = R.string.select_extension_to_add,
-            positive = R.string.ok,
-            negative = R.string.cancel,
-            items = items
+            items = ArrayList(radioItems),
+            checkedItemId = -1
         ) { selectedIndex ->
-            if (selectedIndex >= 0) {
-                val extensionClass = availableExtensions[selectedIndex].second
-                addExtension(extensionClass)
-            }
+            val index = selectedIndex as Int
+            val extensionClass = availableExtensions[index].second
+            addExtension(extensionClass)
         }
     }
     
@@ -148,7 +151,7 @@ class ExtensionSettingsActivity : BaseSimpleActivity() {
             settings = settings
         ) { updatedSettings ->
             extension.updateSettings(updatedSettings)
-            extensionManager.saveExtensionSettings()
+            extensionManager.saveExtensionSettings(extension)
             adapter.notifyDataSetChanged()
         }
     }

@@ -5,27 +5,7 @@ import android.util.Log
 import kotlinx.coroutines.*
 import java.util.concurrent.ConcurrentHashMap
 
-/**
- * Estados de llamada para el sistema de extensiones
- */
-enum class CallState {
-    IDLE,
-    RINGING,
-    OFFHOOK,
-    INCOMING,
-    OUTGOING,
-    ACTIVE,
-    ENDED
-}
 
-/**
- * Configuración de una extensión
- */
-data class ExtensionConfig(
-    val id: String,
-    val isEnabled: Boolean = true,
-    val settings: Map<String, Any> = emptyMap()
-)
 
 /**
  * Gestor central del sistema de extensiones
@@ -130,6 +110,15 @@ class ExtensionManager private constructor() {
      */
     fun getAllExtensions(): List<PhoneExtension> {
         return extensions.values.toList()
+    }
+    
+    /**
+     * Guarda la configuración de una extensión específica
+     */
+    fun saveExtensionSettings(extension: PhoneExtension) {
+        val config = extensionConfigs[extension.id] ?: ExtensionConfig(extension.id)
+        extensionConfigs[extension.id] = config.copy(isEnabled = extension.isEnabled)
+        saveExtensionConfigs()
     }
     
     /**

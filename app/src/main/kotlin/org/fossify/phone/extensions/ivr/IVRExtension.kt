@@ -25,13 +25,14 @@ class IVRExtension : PhoneExtension {
     private var mediaPlayer: MediaPlayer? = null
     private var mediaRecorder: MediaRecorder? = null
     private var audioManager: AudioManager? = null
-    private var isEnabled = false
     private var currentFlow: IVRFlow? = null
     private var currentStep = 0
     
+    override val id = "ivr_extension"
     override val name = "IVR Answering Machine"
     override val version = "1.0.0"
     override val description = "Sistema de contestador automático con menús interactivos de voz"
+    override var isEnabled = false
     
     override fun initialize(context: Context) {
         this.context = context
@@ -52,33 +53,29 @@ class IVRExtension : PhoneExtension {
                     handleIncomingCall(phoneNumber)
                 }
             }
-            CallState.ANSWERED -> {
+            CallState.ACTIVE -> {
                 if (isEnabled && currentFlow != null) {
                     startIVRFlow()
                 }
             }
-            CallState.ENDED -> {
+            CallState.DISCONNECTED -> {
                 stopIVRFlow()
             }
             else -> { /* No action needed */ }
         }
     }
     
-    override fun handleDialpadInput(input: String): Boolean {
+    override fun onDialpadInput(input: String): Boolean {
         // No procesa entrada del dialpad en esta extensión
         return false
     }
     
-    override fun handleUSSDCode(code: String): Boolean {
+    override fun onUSSDCode(code: String): Boolean {
         // No procesa códigos USSD en esta extensión
         return false
     }
     
-    override fun isEnabled(): Boolean = isEnabled
-    
-    override fun setEnabled(enabled: Boolean) {
-        this.isEnabled = enabled
-    }
+
     
     override fun getSettings(): Map<String, Any> {
         return mapOf(

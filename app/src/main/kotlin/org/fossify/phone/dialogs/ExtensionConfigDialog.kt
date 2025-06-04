@@ -51,7 +51,7 @@ class ExtensionConfigDialog(
                 callback(updatedSettings)
             }
             .setNegativeButton(R.string.cancel, null)
-            .create().apply {
+            .apply {
                 activity.setupDialogStuff(view, this, R.string.configure_extension)
             }
     }
@@ -159,7 +159,7 @@ class ExtensionConfigDialog(
     
     private fun getSettingDisplayName(key: String): String {
         return when (key) {
-            "enabled" -> activity.getString(R.string.enabled)
+            "enabled" -> "Habilitado"
             "auto_answer_delay" -> activity.getString(R.string.auto_answer_delay)
             "default_greeting" -> activity.getString(R.string.default_greeting)
             "assistant_personality" -> activity.getString(R.string.assistant_personality)

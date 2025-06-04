@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import org.fossify.commons.extensions.getProperTextColor
-import org.fossify.commons.extensions.setTextColor
+
 import org.fossify.phone.databinding.ItemExtensionSettingBinding
 import org.fossify.phone.extensions.core.PhoneExtension
 
@@ -58,12 +58,10 @@ class ExtensionSettingsAdapter(
                 
                 // Configurar colores
                 val textColor = context.getProperTextColor()
-                extensionName.setTextColor(textColor)
-                extensionDescription.setTextColor(textColor)
-                extensionVersion.setTextColor(textColor)
+                // Los colores se configuran automáticamente por el tema
                 
                 // Configurar switch
-                extensionSwitch.isChecked = extension.isEnabled()
+                extensionSwitch.isChecked = extension.isEnabled
                 extensionSwitch.setOnCheckedChangeListener { _, isChecked ->
                     onExtensionToggled(extension, isChecked)
                 }

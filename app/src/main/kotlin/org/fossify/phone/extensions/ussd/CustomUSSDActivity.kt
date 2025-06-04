@@ -14,6 +14,10 @@ import org.fossify.phone.databinding.ActivityCustomUssdBinding
  */
 class CustomUSSDActivity : BaseSimpleActivity() {
     
+    override fun getAppIconIDs(): ArrayList<Int> = arrayListOf()
+    override fun getAppLauncherName(): String = getString(R.string.app_launcher_name)
+    override fun getRepositoryName(): String? = null
+    
     private val binding by viewBinding(ActivityCustomUssdBinding::inflate)
     
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +31,7 @@ class CustomUSSDActivity : BaseSimpleActivity() {
     private fun setupUI() {
         updateMaterialActivityViews(
             mainCoordinatorLayout = binding.customUssdCoordinator,
-            nestedScrollView = binding.customUssdNestedScrollview,
+            nestedView = binding.customUssdNestedScrollview,
             useTransparentNavigation = true,
             useTopSearchMenu = false
         )
@@ -65,7 +69,7 @@ class CustomUSSDActivity : BaseSimpleActivity() {
             // Mostrar información real del IMEI si está disponible
             try {
                 val telephonyManager = getSystemService(TELEPHONY_SERVICE) as TelephonyManager
-                val imei = if (hasPermission(android.Manifest.permission.READ_PHONE_STATE)) {
+                val imei = if (checkSelfPermission(android.Manifest.permission.READ_PHONE_STATE) == android.content.pm.PackageManager.PERMISSION_GRANTED) {
                     telephonyManager.deviceId ?: "No disponible"
                 } else {
                     "Permisos requeridos"

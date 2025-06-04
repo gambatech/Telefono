@@ -26,14 +26,15 @@ class AIAssistantExtension : PhoneExtension {
     private var textToSpeech: TextToSpeech? = null
     private var speechRecognizer: SpeechRecognizer? = null
     private var audioManager: AudioManager? = null
-    private var isEnabled = false
     private var isListening = false
     private var currentConversation = mutableListOf<ConversationMessage>()
     private var assistantPersonality = AssistantPersonality.PROFESSIONAL
     
+    override val id = "ai_assistant_extension"
     override val name = "AI Assistant"
     override val version = "1.0.0"
     override val description = "Asistente de IA conversacional para interactuar con llamantes"
+    override var isEnabled = false
     
     override fun initialize(context: Context) {
         this.context = context
@@ -60,19 +61,19 @@ class AIAssistantExtension : PhoneExtension {
                     prepareAssistant(phoneNumber)
                 }
             }
-            CallState.ANSWERED -> {
+            CallState.ACTIVE -> {
                 if (isEnabled) {
                     startConversation()
                 }
             }
-            CallState.ENDED -> {
+            CallState.DISCONNECTED -> {
                 endConversation()
             }
             else -> { /* No action needed */ }
         }
     }
     
-    override fun handleDialpadInput(input: String): Boolean {
+    override fun onDialpadInput(input: String): Boolean {
         // El asistente puede responder a comandos específicos del dialpad
         when (input) {
             "*AI*" -> {
@@ -87,16 +88,12 @@ class AIAssistantExtension : PhoneExtension {
         return false
     }
     
-    override fun handleUSSDCode(code: String): Boolean {
+    override fun onUSSDCode(code: String): Boolean {
         // No procesa códigos USSD en esta extensión
         return false
     }
     
-    override fun isEnabled(): Boolean = isEnabled
-    
-    override fun setEnabled(enabled: Boolean) {
-        this.isEnabled = enabled
-    }
+
     
     override fun getSettings(): Map<String, Any> {
         return mapOf(

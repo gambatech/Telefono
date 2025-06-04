@@ -21,8 +21,7 @@ class USSDInterceptorExtension : PhoneExtension {
     override val name: String = "Interceptor de Códigos USSD"
     override val version: String = "1.0.0"
     override val description: String = "Intercepta códigos USSD específicos como *#06# para mostrar información personalizada"
-    override val isEnabled: Boolean = true
-    override val priority: Int = 100 // Alta prioridad para interceptar antes que otros
+    override var isEnabled: Boolean = true
     
     private var context: Context? = null
     private val interceptedCodes = mutableSetOf<String>()

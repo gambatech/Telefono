@@ -18,7 +18,6 @@ class CallBlockingExtension : PhoneExtension {
     
     private var context: Context? = null
     private var preferences: SharedPreferences? = null
-    private var isEnabled = false
     private val blockedNumbers = mutableSetOf<String>()
     private val blockedPatterns = mutableSetOf<String>()
     private val whitelistedNumbers = mutableSetOf<String>()
@@ -26,9 +25,11 @@ class CallBlockingExtension : PhoneExtension {
     private var blockPrivateNumbers = false
     private var blockInternationalNumbers = false
     
+    override val id = "call_blocking_extension"
     override val name = "Call Blocking"
     override val version = "1.0.0"
     override val description = "Bloquea llamadas no deseadas basándose en números, patrones y reglas personalizadas"
+    override var isEnabled = false
     
     override fun initialize(context: Context) {
         this.context = context
@@ -47,7 +48,7 @@ class CallBlockingExtension : PhoneExtension {
         }
     }
     
-    override fun handleDialpadInput(input: String): Boolean {
+    override fun onDialpadInput(input: String): Boolean {
         // Comandos especiales para gestión de bloqueo
         when (input) {
             "*BLOCK*" -> {
@@ -62,17 +63,12 @@ class CallBlockingExtension : PhoneExtension {
         return false
     }
     
-    override fun handleUSSDCode(code: String): Boolean {
+    override fun onUSSDCode(code: String): Boolean {
         // No procesa códigos USSD en esta extensión
         return false
     }
     
-    override fun isEnabled(): Boolean = isEnabled
-    
-    override fun setEnabled(enabled: Boolean) {
-        this.isEnabled = enabled
-        saveSettings()
-    }
+
     
     override fun getSettings(): Map<String, Any> {
         return mapOf(

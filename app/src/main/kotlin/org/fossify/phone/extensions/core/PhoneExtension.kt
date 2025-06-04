@@ -19,7 +19,7 @@ interface PhoneExtension {
     val description: String
     
     /** Estado de activación */
-    val isEnabled: Boolean
+    var isEnabled: Boolean
     
     /** Prioridad de ejecución (mayor número = mayor prioridad) */
     val priority: Int get() = 0
@@ -57,6 +57,16 @@ interface PhoneExtension {
      * @param isIncoming true si es audio entrante, false si es saliente
      */
     fun onAudioData(audioData: ByteArray, isIncoming: Boolean) {}
+    
+    /**
+     * Obtiene la configuración actual de la extensión
+     */
+    fun getSettings(): Map<String, Any> = emptyMap()
+    
+    /**
+     * Actualiza la configuración de la extensión
+     */
+    fun updateSettings(settings: Map<String, Any>) {}
     
     /**
      * Limpia recursos de la extensión

@@ -4,11 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?android:attr/selectableItemBackground"
-    android:minHeight="@dimen/list_item_height"
-    android:paddingStart="@dimen/medium_margin"
-    android:paddingTop="@dimen/small_margin"
-    android:paddingEnd="@dimen/medium_margin"
-    android:paddingBottom="@dimen/small_margin">
+    android:minHeight="72dp"
+    android:paddingStart="16dp"
+    android:paddingTop="8dp"
+    android:paddingEnd="16dp"
+    android:paddingBottom="8dp">
 
     <TextView
         android:id="@+id/extension_name"
@@ -20,7 +20,7 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:textColor="@color/color_primary"
-        android:textSize="@dimen/bigger_text_size"
+        android:textSize="18sp"
         android:textStyle="bold"
         tools:text="IVR Extension" />
 
@@ -30,12 +30,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/extension_name"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="@dimen/tiny_margin"
+        android:layout_marginTop="4dp"
         android:layout_toStartOf="@+id/extension_config_button"
         android:ellipsize="end"
         android:maxLines="2"
         android:textColor="@color/color_primary"
-        android:textSize="@dimen/normal_text_size"
+        android:textSize="14sp"
         tools:text="Sistema de contestador automático con menús interactivos de voz" />
 
     <TextView
@@ -44,22 +44,22 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/extension_description"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="@dimen/tiny_margin"
+        android:layout_marginTop="4dp"
         android:textColor="@color/color_primary"
-        android:textSize="@dimen/small_text_size"
+        android:textSize="12sp"
         android:textStyle="italic"
         tools:text="v1.0.0" />
 
     <ImageButton
         android:id="@+id/extension_config_button"
-        android:layout_width="@dimen/actionbar_icon_size"
-        android:layout_height="@dimen/actionbar_icon_size"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignParentTop="true"
-        android:layout_marginEnd="@dimen/small_margin"
+        android:layout_marginEnd="8dp"
         android:layout_toStartOf="@+id/extension_switch"
         android:background="?android:attr/selectableItemBackgroundBorderless"
         android:contentDescription="@string/configure_extension"
-        android:src="@drawable/ic_settings_vector" />
+        android:src="@drawable/ic_add_call_vector" />
 
     <Switch
         android:id="@+id/extension_switch"
