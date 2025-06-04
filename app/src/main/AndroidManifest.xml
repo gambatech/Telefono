@@ -168,6 +168,20 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".extensions.ussd.CustomUSSDActivity"
+            android:configChanges="orientation"
+            android:exported="false"
+            android:label="@string/ussd_intercepted"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".activities.ExtensionSettingsActivity"
+            android:configChanges="orientation"
+            android:exported="false"
+            android:label="@string/extension_settings"
+            android:theme="@style/AppTheme" />
+
         <service
             android:name=".services.CallService"
             android:enabled="true"

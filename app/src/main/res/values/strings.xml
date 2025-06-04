@@ -88,6 +88,41 @@
     <string name="faq_2_text">Due to system restrictions, emergency calls can only be made through your system\'s default dialer or phone app. To ensure emergency calls work properly, you need to keep the system app installed and enabled.</string>
     <string name="faq_3_title">Why are some of my contacts missing from the app?</string>
     <string name="faq_3_text">Fossify Phone only displays contacts that have a phone number associated with them. Contacts without a phone number are not shown in the app.</string>
+
+    <!-- Extensions -->
+    <string name="extensions">Extensions</string>
+    <string name="extension_settings">Extension Settings</string>
+    <string name="ussd_intercepted">USSD Intercepted</string>
+    <string name="intercepted_message_title">Intercepted Message</string>
+    <string name="detailed_information">Detailed Information</string>
+    <string name="close">Close</string>
+    <string name="add_extension">Add Extension</string>
+    <string name="no_extensions_found">No extensions found</string>
+    <string name="select_extension_to_add">Select extension to add</string>
+    <string name="extension_added_successfully">Extension added successfully</string>
+    <string name="error_adding_extension">Error adding extension</string>
+    <string name="configure_extension">Configure extension</string>
+    <string name="toggle_extension">Toggle extension</string>
+    
+    <!-- Call Blocking -->
+    <string name="call_blocking">Call Blocking</string>
+    <string name="blocked_numbers">Blocked Numbers</string>
+    <string name="whitelisted_numbers">Whitelisted Numbers</string>
+    <string name="block_unknown_numbers">Block unknown numbers</string>
+    <string name="block_private_numbers">Block private numbers</string>
+    <string name="block_international_numbers">Block international numbers</string>
+    <string name="blocked_calls_count">Blocked calls</string>
+    
+    <!-- IVR -->
+    <string name="ivr_extension">IVR Extension</string>
+    <string name="auto_answer_delay">Auto answer delay</string>
+    <string name="default_greeting">Default greeting</string>
+    
+    <!-- AI Assistant -->
+    <string name="ai_assistant">AI Assistant</string>
+    <string name="assistant_personality">Assistant personality</string>
+    <string name="conversation_timeout">Conversation timeout</string>
+
     <!--
         Haven't found some strings? There's more at
         https://github.com/FossifyOrg/Commons/tree/master/commons/src/main/res

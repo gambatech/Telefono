@@ -23,6 +23,11 @@ import org.fossify.phone.R
 import org.fossify.phone.adapters.ContactsAdapter
 import org.fossify.phone.databinding.ActivityDialpadBinding
 import org.fossify.phone.extensions.*
+import org.fossify.phone.extensions.core.ExtensionManager
+import org.fossify.phone.extensions.ussd.USSDInterceptorExtension
+import org.fossify.phone.extensions.ivr.IVRExtension
+import org.fossify.phone.extensions.ai.AIAssistantExtension
+import org.fossify.phone.extensions.callblocking.CallBlockingExtension
 import org.fossify.phone.helpers.DIALPAD_TONE_LENGTH_MS
 import org.fossify.phone.helpers.RecentsHelper
 import org.fossify.phone.helpers.ToneGeneratorHelper
@@ -42,6 +47,7 @@ class DialpadActivity : SimpleActivity() {
     private val longPressTimeout = ViewConfiguration.getLongPressTimeout().toLong()
     private val longPressHandler = Handler(Looper.getMainLooper())
     private val pressedKeys = mutableSetOf<Char>()
+    private val extensionManager = ExtensionManager.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -99,6 +105,9 @@ class DialpadActivity : SimpleActivity() {
         privateCursor = getMyContactsCursor(favoritesOnly = false, withPhoneNumbersOnly = true)
 
         toneGeneratorHelper = ToneGeneratorHelper(this, DIALPAD_TONE_LENGTH_MS)
+        
+        // Inicializar sistema de extensiones
+        initializeExtensions()
 
         binding.dialpadWrapper.apply {
             if (hasRussianLocale) {
@@ -218,6 +227,22 @@ class DialpadActivity : SimpleActivity() {
     }
 
     private fun dialpadPressed(char: Char, view: View?) {
+        val currentInput = binding.dialpadInput.value + char
+        
+        // Permitir que las extensiones procesen la entrada primero
+        if (extensionManager.handleDialpadInput(currentInput)) {
+            // La extensión consumió la entrada, no continuar con el procesamiento normal
+            return
+        }
+        
+        // Verificar códigos USSD específicos
+        if (isUSSDCode(currentInput) && extensionManager.handleUSSDCode(currentInput)) {
+            // Código USSD interceptado por extensión
+            binding.dialpadInput.setText("")
+            return
+        }
+        
+        // Procesamiento normal del dialpad
         binding.dialpadInput.addCharacter(char)
         maybePerformDialpadHapticFeedback(view)
     }
@@ -439,5 +464,30 @@ class DialpadActivity : SimpleActivity() {
             }
             false
         }
+    }
+    
+    /**
+     * Inicializa el sistema de extensiones
+     */
+    private fun initializeExtensions() {
+        extensionManager.initialize(this)
+        
+        // Registrar todas las extensiones disponibles
+        val ussdInterceptor = USSDInterceptorExtension()
+        val ivrExtension = IVRExtension()
+        val aiAssistant = AIAssistantExtension()
+        val callBlocking = CallBlockingExtension()
+        
+        extensionManager.registerExtension(ussdInterceptor)
+        extensionManager.registerExtension(ivrExtension)
+        extensionManager.registerExtension(aiAssistant)
+        extensionManager.registerExtension(callBlocking)
+    }
+    
+    /**
+     * Verifica si una cadena es un código USSD
+     */
+    private fun isUSSDCode(input: String): Boolean {
+        return input.startsWith("*") && (input.endsWith("#") || input.contains("#"))
     }
 }
