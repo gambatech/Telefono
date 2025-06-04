@@ -6,6 +6,28 @@ import kotlinx.coroutines.*
 import java.util.concurrent.ConcurrentHashMap
 
 /**
+ * Estados de llamada para el sistema de extensiones
+ */
+enum class CallState {
+    IDLE,
+    RINGING,
+    OFFHOOK,
+    INCOMING,
+    OUTGOING,
+    ACTIVE,
+    ENDED
+}
+
+/**
+ * Configuración de una extensión
+ */
+data class ExtensionConfig(
+    val id: String,
+    val isEnabled: Boolean = true,
+    val settings: Map<String, Any> = emptyMap()
+)
+
+/**
  * Gestor central del sistema de extensiones
  * Maneja el registro, activación y coordinación de todas las extensiones
  */

@@ -222,6 +222,7 @@ class MainActivity : SimpleActivity() {
                     R.id.sort -> showSortingDialog(showCustomSorting = getCurrentFragment() is FavoritesFragment)
                     R.id.filter -> showFilterDialog()
                     R.id.more_apps_from_us -> launchMoreAppsFromUsIntent()
+                    R.id.extension_settings -> launchExtensionSettings()
                     R.id.settings -> launchSettings()
                     R.id.change_view_type -> changeViewType()
                     R.id.column_count -> changeColumnCount()
@@ -552,6 +553,11 @@ class MainActivity : SimpleActivity() {
     private fun launchSettings() {
         hideKeyboard()
         startActivity(Intent(applicationContext, SettingsActivity::class.java))
+    }
+
+    private fun launchExtensionSettings() {
+        hideKeyboard()
+        startActivity(Intent(applicationContext, ExtensionSettingsActivity::class.java))
     }
 
     private fun launchAbout() {

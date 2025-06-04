@@ -36,7 +36,7 @@
         app:showAsAction="never" />
     <item
         android:id="@+id/extension_settings"
-        android:icon="@drawable/ic_extension_vector"
+        android:icon="@drawable/ic_add_call_vector"
         android:title="@string/extension_settings"
         app:showAsAction="never" />
     <item
