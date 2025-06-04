@@ -230,8 +230,18 @@ class ExtensionManager private constructor() {
      * Registra las extensiones integradas
      */
     private fun registerBuiltInExtensions() {
-        // Se registrarán las extensiones específicas aquí
-        // Por ahora dejamos el método preparado para futuras implementaciones
+        // Extensiones básicas v1.0
+        registerExtension(USSDInterceptorExtension())
+        registerExtension(IVRExtension())
+        registerExtension(AIAssistantExtension())
+        registerExtension(CallBlockingExtension())
+        
+        // Extensiones avanzadas v1.1
+        registerExtension(org.fossify.phone.extensions.PBXExtension())
+        registerExtension(org.fossify.phone.extensions.ContactSyncExtension())
+        registerExtension(org.fossify.phone.extensions.CallAnalyticsExtension())
+        
+        Log.d(TAG, "Built-in extensions registered (${extensions.size} total)")
     }
     
     /**

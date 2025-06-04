@@ -57,6 +57,35 @@ Protección avanzada contra llamadas no deseadas:
 - **Registro detallado**: Historial completo de llamadas bloqueadas
 - **Casos de uso**: Anti-spam, telemarketing, ex-parejas molestas
 
+### 🚀 **Extensiones Avanzadas (v1.1) - ¡NUEVAS!**
+
+#### 5. 🏢 **Sistema PBX Empresarial**
+Centralita profesional completa:
+- **Menús multinivel**: Crea sistemas de navegación complejos por voz
+- **Enrutamiento inteligente**: Dirige llamadas por departamento y horarios
+- **Cola de espera**: Música personalizada y posición en tiempo real
+- **Grabación automática**: Registra llamadas para calidad y entrenamiento
+- **Transferencias**: Conecta automáticamente con el departamento correcto
+- **Casos de uso**: Empresas medianas/grandes, call centers, servicios profesionales
+
+#### 6. 📇 **Sincronización de Contactos Empresarial**
+Gestión avanzada sin dependencias de Google:
+- **Múltiples fuentes**: CardDAV, Exchange, LDAP, CSV, APIs personalizadas
+- **Sincronización bidireccional**: Cambios automáticos en ambas direcciones
+- **Backup encriptado**: Copias de seguridad locales protegidas
+- **Resolución de conflictos**: Algoritmos inteligentes para cambios simultáneos
+- **Importación masiva**: Migra miles de contactos fácilmente
+- **Casos de uso**: Empresas con servidores propios, organizaciones sin Google
+
+#### 7. 📊 **Analítica de Llamadas Avanzada**
+Dashboard ejecutivo con métricas profesionales:
+- **Estadísticas en tiempo real**: KPIs actualizados automáticamente
+- **Análisis de patrones**: Descubre tendencias de comunicación
+- **Reportes exportables**: PDF, Excel, CSV para presentaciones
+- **Métricas de productividad**: Optimiza el rendimiento del equipo
+- **Tendencias temporales**: Análisis por horas, días, semanas, meses
+- **Casos de uso**: Gerentes, equipos de ventas, análisis de rendimiento
+
 ### ⚙️ **Configuración Fácil de Extensiones**
 1. **Abre Zaphone** en tu dispositivo
 2. **Accede al menú** → **"Configuración de Extensiones"**
